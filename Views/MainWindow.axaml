@@ -9,7 +9,7 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="RequesterAvDesk">
-
+	<!--Создание всплывающего окна-->
 	<dialogHost:DialogHost Name="errDial" 
 						   Identifier="dialogError" 
 						   CloseOnClickAway="True"
@@ -20,10 +20,11 @@
 				<Button Content="Закрыть" Click="CloseDialog"/>
 			</StackPanel>
 		</dialogHost:DialogHost.DialogContent>
-	
+	<!--Контроллер вкладок-->
 	<TabControl Name="tabControl"
         Margin="0 16"
         TabStripPlacement="Top">
+		<!--Первая вкладка - загрузка/сохранение-->
 		<TabItem Header="Загрузка/Сохранение">
 			<StackPanel  Orientation="Vertical" Spacing="8">
 				<StackPanel HorizontalAlignment="Center">
@@ -52,6 +53,7 @@
 				</StackPanel>
 			</StackPanel>
 		</TabItem>
+		<!--Вторая вкладка - необработанные заявки-->
 		<TabItem Header="Необработанные заявки">
 				<DataGrid Name="dGridOpen" Grid.Row="1"
 					Margin="20"
@@ -94,6 +96,7 @@
 					</DataGrid.Columns>
 				</DataGrid>
 		</TabItem>
+		<!--Третья вкладка - обработанные заявки-->
 		<TabItem Header="Обработанные заявки" IsEnabled="True">
 			<DataGrid Name="dGridClosed" Grid.Row="1"
 					Margin="20"
@@ -136,6 +139,7 @@
 				</DataGrid.Columns>
 			</DataGrid>
 		</TabItem>
+		<!--Четвёртая вкладка - поиск-->
 		<TabItem Header="Поиск" IsEnabled="True">
 			<Grid ColumnDefinitions="auto,1*" RowDefinitions="Auto,1*" Margin="0">
 				<ComboBox Grid.Row="0" Grid.Column="0" Width="200"

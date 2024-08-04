@@ -4,6 +4,9 @@ using System.IO;
 
 namespace RequesterAvDesk.Models
 {
+    ///
+    ///Класс для парсинга/сохранения xlsx файла
+    ///
     public class DataLoaderXLSX
     {
         public string path { get; set; } = string.Empty;
@@ -29,61 +32,32 @@ namespace RequesterAvDesk.Models
             FileInfo fileInfo = new FileInfo(path);
             using (ExcelPackage package = new ExcelPackage(fileInfo))
             {
-                if (package.Workbook.Worksheets.Count == 1) {
-                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+                ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
 
-                    for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
-                    {
-                        string requestType = worksheet.Cells[row, 1].Text;
-                        string dateReceived = worksheet.Cells[row, 2].Text;
-                        string dateResponded = worksheet.Cells[row, 3].Text;
-                        string FIO = worksheet.Cells[row, 4].Text;
-                        string INN = worksheet.Cells[row, 5].Text;
-                        string KPP = worksheet.Cells[row, 6].Text;
-                        string institution = worksheet.Cells[row, 7].Text;
-                        string district = worksheet.Cells[row, 8].Text;
-                        string department = worksheet.Cells[row, 9].Text;
-                        string phone = worksheet.Cells[row, 10].Text;
-                        string email = worksheet.Cells[row, 11].Text;
-                        string login = worksheet.Cells[row, 12].Text;
-                        string password = worksheet.Cells[row, 13].Text;
-                        string comment = worksheet.Cells[row, 14].Text;
-
-                        RequestModel request = new RequestModel(
-                            requestType, dateReceived, dateResponded, FIO, INN, KPP, institution,
-                            district, department, phone, email, login, password, comment, CheckIsClosed(dateResponded));
-
-                        requestsList.Add(request);
-                    }
-                }
-                else
+                for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
                 {
-                    ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
+                    string requestType = worksheet.Cells[row, 1].Text;
+                    string dateReceived = worksheet.Cells[row, 2].Text;
+                    string dateResponded = worksheet.Cells[row, 3].Text;
+                    string FIO = worksheet.Cells[row, 4].Text;
+                    string INN = worksheet.Cells[row, 5].Text;
+                    string KPP = worksheet.Cells[row, 6].Text;
+                    string institution = worksheet.Cells[row, 7].Text;
+                    string district = worksheet.Cells[row, 8].Text;
+                    string department = worksheet.Cells[row, 9].Text;
+                    string phone = worksheet.Cells[row, 10].Text;
+                    string email = worksheet.Cells[row, 11].Text;
+                    string login = worksheet.Cells[row, 12].Text;
+                    string password = worksheet.Cells[row, 13].Text;
+                    string comment = worksheet.Cells[row, 14].Text;
 
-                    for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
-                    {
-                        string requestType = worksheet.Cells[row, 1].Text;
-                        string dateReceived = worksheet.Cells[row, 2].Text;
-                        string dateResponded = worksheet.Cells[row, 3].Text;
-                        string FIO = worksheet.Cells[row, 4].Text;
-                        string INN = worksheet.Cells[row, 5].Text;
-                        string KPP = worksheet.Cells[row, 6].Text;
-                        string institution = worksheet.Cells[row, 7].Text;
-                        string district = worksheet.Cells[row, 8].Text;
-                        string department = worksheet.Cells[row, 9].Text;
-                        string phone = worksheet.Cells[row, 10].Text;
-                        string email = worksheet.Cells[row, 11].Text;
-                        string login = worksheet.Cells[row, 12].Text;
-                        string password = worksheet.Cells[row, 13].Text;
-                        string comment = worksheet.Cells[row, 14].Text;
-
-                        RequestModel request = new RequestModel(
-                            requestType, dateReceived, dateResponded, FIO, INN, KPP, institution,
-                            district, department, phone, email, login, password, comment, CheckIsClosed(dateResponded));
-
-                        requestsList.Add(request);
-                    }
+                    RequestModel request = new RequestModel(
+                        requestType, dateReceived, dateResponded, FIO, INN, KPP, institution,
+                        district, department, phone, email, login, password, comment, CheckIsClosed(dateResponded));
+                     
+                    requestsList.Add(request);
                 }
+                
             }
 
             return requestsList;

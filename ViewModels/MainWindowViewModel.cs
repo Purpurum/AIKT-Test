@@ -22,6 +22,9 @@ namespace RequesterAvDesk.ViewModels
         private ObservableCollection<RequestModel> _filteredRequests;
         private string _searchText;
         private string _selectedField;
+        ///
+        ///Список полей для поиска
+        ///
         private string[] _searchFields =
         {
             "Выберите поле",
@@ -40,6 +43,11 @@ namespace RequesterAvDesk.ViewModels
             "Пароль",
             "Комментарий"
         };
+        ///
+        ///Словарь, используемый при реализации поиска
+        ///Ключ - Из поля поиска
+        ///Значение - Параметр класса
+        ///
         private Dictionary<string, string> _searchFieldsDict = new Dictionary<string, string>
     {
         { "ФИО", "FullName" },
@@ -57,7 +65,9 @@ namespace RequesterAvDesk.ViewModels
         { "Пароль", "Password" },
         { "Комментарий", "Comment" }
     };
-
+        ///
+        ///Создание наблюдателей для каждой коллекции заявок
+        ///
         public ObservableCollection<RequestModel> AllRequests
         {
             get { return _allrequests; }
@@ -96,6 +106,10 @@ namespace RequesterAvDesk.ViewModels
                 OnPropertyChanged(nameof(FilteredRequests));
             }
         }
+
+        ///
+        ///Создание глобальных (в рамках класса) переменных для поиска и добавление им триггера
+        ///
         public string SearchText
         {
             get => _searchText;
@@ -129,17 +143,26 @@ namespace RequesterAvDesk.ViewModels
 
         }
 
+        ///
+        ///Метод для сохранения xml
+        ///
         public void SaveXML(string path)
         {
             dataLoaderXML.SaveData(OpenRequests.ToList(), path + "/OpenedRequests.xml");
             dataLoaderXML.SaveData(ClosedRequests.ToList(), path + "/ClosedRequests.xml");
         }
 
+        ///
+        ///Метод для сохранения xlsx
+        ///
         public void SaveXLSX(string path)
         {
             dataLoaderXLSX.SaveData(OpenRequests.ToList(), ClosedRequests.ToList(), path + "/Requests.xlsx");
         }
 
+        ///
+        ///Загрузчик данных в наблюдаемые колекции
+        ///
         public void SelectPath(IEnumerable<Avalonia.Platform.Storage.IStorageItem> filePaths)
         {
             foreach(var filePath in filePaths)
@@ -204,6 +227,9 @@ namespace RequesterAvDesk.ViewModels
 
         }
 
+        ///
+        ///Метод для фильтрации заявок для поиска
+        ///
         private void FilterRequests()
         {
             _filteredRequests.Clear();
@@ -230,6 +256,10 @@ namespace RequesterAvDesk.ViewModels
             }
         }
 
+        ///
+        ///Метод для перемещения бъектов из одной коллекции в другую
+        ///Используется при отметке обработанных заявок 
+        ///
         public void MoveRequest(RequestModel req, bool isClosed)
         {
             if (isClosed)
@@ -256,6 +286,9 @@ namespace RequesterAvDesk.ViewModels
             }
         }
 
+        ///
+        ///Метод для генерации логина и пароля
+        ///
         public void GenerateCredentials(RequestModel req) {
             string GenerateUniqueLogin()
             {

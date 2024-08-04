@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RequesterAvDesk.Models
 {
+    ///
+    ///Модель объекта заявки
+    ///
     public class RequestModel(string requestType, string dateReceived, string dateResponded, string fullName, string inn, string kpp, string institution, string district, string department, string phone, string email, string login, string password, string comment, bool isClosed)
     {
         public string RequestType { get; set; } = requestType;

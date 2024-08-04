@@ -9,6 +9,9 @@ using System.Xml.Linq;
 
 namespace RequesterAvDesk.Models
 {
+    ///
+    ///Класс для парсинга/сохранения xml файла
+    ///
     public class DataloaderXML
     {
         public string path { get; set; } = string.Empty;

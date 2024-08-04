@@ -19,7 +19,7 @@ namespace RequesterAvDesk.Views
             InitializeComponent();
             DataContext = new MainWindowViewModel();
 
-            //Отдельный обработчик для дропа, просто потому что чек авалонии не хотел стабильно работать
+            //Отдельный обработчик для дропа, просто потому что обработчик авалонии, задаваемый в axaml не хотел стабильно работать
             AddHandler(DragDrop.DropEvent, OnDrop);
         }
 
