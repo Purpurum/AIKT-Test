@@ -80,7 +80,10 @@
 						<DataGridTemplateColumn Header="Закрыто">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
-									<CheckBox IsChecked="{Binding IsClosed}"  
+									<CheckBox
+										HorizontalAlignment="Center"
+											  VerticalAlignment="Center"
+										IsChecked="{Binding IsClosed}"  
 											  Checked="OnCheckboxChecked"/>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
@@ -89,7 +92,10 @@
 						<DataGridTemplateColumn Header="Генерация">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
-									<Button Content="Сгенерировать" Click="OnButtonClick"/>
+									<Button
+										HorizontalAlignment="Center"
+											  VerticalAlignment="Center"
+										Content="Сгенерировать" Click="OnButtonClick"/>
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn>
@@ -123,16 +129,22 @@
 					<DataGridTemplateColumn Header="Закрыто">
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
-								<CheckBox IsChecked="{Binding IsClosed}"
+								<CheckBox
+									HorizontalAlignment="Center"
+											  VerticalAlignment="Center"
+									IsChecked="{Binding IsClosed}"
 										  Unchecked="OnCheckboxUnchecked"/>
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
 
-					<DataGridTemplateColumn Header="Действия">
+					<DataGridTemplateColumn Header="Генерация">
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
-								<Button Content="Действие" Click="OnButtonClick"/>
+								<Button
+									HorizontalAlignment="Center"
+											  VerticalAlignment="Center"
+									Content="Сгенерировать" Click="OnButtonClick"/>
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
@@ -173,7 +185,10 @@
 					<DataGridTemplateColumn Header="Закрыто">
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
-								<CheckBox IsChecked="{Binding IsClosed}"
+								<CheckBox
+									HorizontalAlignment="Center"
+											  VerticalAlignment="Center"
+									IsChecked="{Binding IsClosed}"
 										  Unchecked="OnCheckboxUnchecked"
 										  Checked="OnCheckboxChecked"
 										  />
@@ -181,10 +196,13 @@
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
 
-					<DataGridTemplateColumn Header="Действия">
+					<DataGridTemplateColumn Header="Генерация">
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
-								<Button Content="Действие" Click="OnButtonClick"/>
+								<Button
+									HorizontalAlignment="Center"
+											  VerticalAlignment="Center"
+									Content="Сгенерировать" Click="OnButtonClick"/>
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
