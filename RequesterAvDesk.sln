@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34714.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequesterAvDesk", "RequesterAvDesk.csproj", "{270B9356-05E9-43F1-BC07-E7460DA3C749}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{270B9356-05E9-43F1-BC07-E7460DA3C749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{270B9356-05E9-43F1-BC07-E7460DA3C749}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{270B9356-05E9-43F1-BC07-E7460DA3C749}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{270B9356-05E9-43F1-BC07-E7460DA3C749}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7DA544C1-B737-4A77-8B7C-58760ACFC42A}
+	EndGlobalSection
+EndGlobal

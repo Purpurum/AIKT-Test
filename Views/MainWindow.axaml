@@ -1,0 +1,193 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:RequesterAvDesk.ViewModels"
+		xmlns:dialogHost="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="RequesterAvDesk.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="RequesterAvDesk">
+
+	<dialogHost:DialogHost Name="errDial" 
+						   Identifier="dialogError" 
+						   CloseOnClickAway="True"
+						   >
+		<dialogHost:DialogHost.DialogContent>
+			<StackPanel>
+				<TextBlock Text="Поля введены неверно! Изменения не сохранятся и пренос не будет выполнен!"/>
+				<Button Content="Закрыть" Click="CloseDialog"/>
+			</StackPanel>
+		</dialogHost:DialogHost.DialogContent>
+	
+	<TabControl Name="tabControl"
+        Margin="0 16"
+        TabStripPlacement="Top">
+		<TabItem Header="Загрузка/Сохранение">
+			<StackPanel  Orientation="Vertical" Spacing="8">
+				<StackPanel HorizontalAlignment="Center">
+					<Button HorizontalContentAlignment="Center" 
+							VerticalContentAlignment="Center" 
+							Width="150" 
+							Height="50" 
+							Content="Выберите файл" 
+							Click="ChooseFile"/>
+				</StackPanel>
+				<Border CornerRadius="3"
+						Height="350"
+				BorderBrush=""
+				BorderThickness="2"
+				Grid.Row="0"
+				Background="Gray"
+				DragDrop.AllowDrop="True">
+					<TextBlock Name="texb"
+							   Text="{Binding DropText}"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Center"/>
+				</Border>
+				<StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="40">
+				<Button Content="Сохранить XML" Click="SaveXML"/>
+				<Button Content="Сохранить XLSX" Click="SaveXLSX"/>
+				</StackPanel>
+			</StackPanel>
+		</TabItem>
+		<TabItem Header="Необработанные заявки">
+				<DataGrid Name="dGridOpen" Grid.Row="1"
+					Margin="20"
+					ItemsSource="{Binding OpenRequests}"
+					GridLinesVisibility="All"
+					BorderThickness="1" BorderBrush="Gray"
+					CellEditEnding="CheckEditValidity"
+					BeginningEdit="OnCellEditBeginning">
+					<DataGrid.Columns>
+						<DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" />
+						<DataGridTextColumn Header="Тип Запроса" Binding="{Binding RequestType}" />
+						<DataGridTextColumn Header="Дата Получения" Binding="{Binding DateReceived}" />
+						<DataGridTextColumn Header="Дата Ответа" Binding="{Binding DateResponded}" />
+						<DataGridTextColumn Header="ИНН" Binding="{Binding INN}" />
+						<DataGridTextColumn Header="КПП" Binding="{Binding KPP}" />
+						<DataGridTextColumn Header="Учреждение" Binding="{Binding Institution}" />
+						<DataGridTextColumn Header="Район" Binding="{Binding District}" />
+						<DataGridTextColumn Header="Отдел" Binding="{Binding Department}" />
+						<DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" />
+						<DataGridTextColumn Header="Электронная Почта" Binding="{Binding Email}" />
+						<DataGridTextColumn Header="Логин" Binding="{Binding Login}" />
+						<DataGridTextColumn Header="Пароль" Binding="{Binding Password}" />
+						<DataGridTextColumn Header="Комментарий" Binding="{Binding Comment}" />
+						<DataGridTemplateColumn Header="Закрыто">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<CheckBox IsChecked="{Binding IsClosed}"  
+											  Checked="OnCheckboxChecked"/>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+
+						<DataGridTemplateColumn Header="Генерация">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<Button Content="Сгенерировать" Click="OnButtonClick"/>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+		</TabItem>
+		<TabItem Header="Обработанные заявки" IsEnabled="True">
+			<DataGrid Name="dGridClosed" Grid.Row="1"
+					Margin="20"
+					ItemsSource="{Binding ClosedRequests}"
+					GridLinesVisibility="All"
+					BorderThickness="1" BorderBrush="Gray"
+					CellEditEnding="CheckEditValidity"
+					BeginningEdit="OnCellEditBeginning">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" />
+					<DataGridTextColumn Header="Тип Запроса" Binding="{Binding RequestType}" />
+					<DataGridTextColumn Header="Дата Получения" Binding="{Binding DateReceived}" />
+					<DataGridTextColumn Header="Дата Ответа" Binding="{Binding DateResponded}" />
+					<DataGridTextColumn Header="ИНН" Binding="{Binding INN}" />
+					<DataGridTextColumn Header="КПП" Binding="{Binding KPP}" />
+					<DataGridTextColumn Header="Учреждение" Binding="{Binding Institution}" />
+					<DataGridTextColumn Header="Район" Binding="{Binding District}" />
+					<DataGridTextColumn Header="Отдел" Binding="{Binding Department}" />
+					<DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" />
+					<DataGridTextColumn Header="Электронная Почта" Binding="{Binding Email}" />
+					<DataGridTextColumn Header="Логин" Binding="{Binding Login}" />
+					<DataGridTextColumn Header="Пароль" Binding="{Binding Password}" />
+					<DataGridTextColumn Header="Комментарий" Binding="{Binding Comment}" />
+					<DataGridTemplateColumn Header="Закрыто">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<CheckBox IsChecked="{Binding IsClosed}"
+										  Unchecked="OnCheckboxUnchecked"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+
+					<DataGridTemplateColumn Header="Действия">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<Button Content="Действие" Click="OnButtonClick"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+				</DataGrid.Columns>
+			</DataGrid>
+		</TabItem>
+		<TabItem Header="Поиск" IsEnabled="True">
+			<Grid ColumnDefinitions="auto,1*" RowDefinitions="Auto,1*" Margin="0">
+				<ComboBox Grid.Row="0" Grid.Column="0" Width="200"
+					ItemsSource="{Binding SearchFields}"
+					SelectedValue="{Binding SelectedField}"
+					></ComboBox>
+				<TextBox Grid.Row="0" Grid.Column="1" 
+						 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
+			<DataGrid Name="dGridSearch" Grid.Row="1" Grid.ColumnSpan="2"
+					Margin="20"
+					ItemsSource="{Binding FilteredRequests}"
+					GridLinesVisibility="All"
+					BorderThickness="1" BorderBrush="Gray"
+					CellEditEnding="CheckEditValidity"
+					BeginningEdit="OnCellEditBeginning">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" />
+					<DataGridTextColumn Header="Тип Запроса" Binding="{Binding RequestType}" />
+					<DataGridTextColumn Header="Дата Получения" Binding="{Binding DateReceived}" />
+					<DataGridTextColumn Header="Дата Ответа" Binding="{Binding DateResponded}" />
+					<DataGridTextColumn Header="ИНН" Binding="{Binding INN}" />
+					<DataGridTextColumn Header="КПП" Binding="{Binding KPP}" />
+					<DataGridTextColumn Header="Учреждение" Binding="{Binding Institution}" />
+					<DataGridTextColumn Header="Район" Binding="{Binding District}" />
+					<DataGridTextColumn Header="Отдел" Binding="{Binding Department}" />
+					<DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" />
+					<DataGridTextColumn Header="Электронная Почта" Binding="{Binding Email}" />
+					<DataGridTextColumn Header="Логин" Binding="{Binding Login}" />
+					<DataGridTextColumn Header="Пароль" Binding="{Binding Password}" />
+					<DataGridTextColumn Header="Комментарий" Binding="{Binding Comment}" />
+					<DataGridTemplateColumn Header="Закрыто">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<CheckBox IsChecked="{Binding IsClosed}"
+										  Unchecked="OnCheckboxUnchecked"
+										  Checked="OnCheckboxChecked"
+										  />
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+
+					<DataGridTemplateColumn Header="Действия">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<Button Content="Действие" Click="OnButtonClick"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+				</DataGrid.Columns>
+			</DataGrid>
+			</Grid>
+		</TabItem>
+	</TabControl>
+	</dialogHost:DialogHost>
+</Window>
